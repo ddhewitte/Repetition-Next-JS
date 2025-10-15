@@ -1,11 +1,23 @@
+"use client";
+
+
+import Link from 'next/link';
+import { useCart } from '../context/CartContext';
+
 export default function Header() {
+  const { cart } = useCart();
+  const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
-    <header className="bg-gray-900 text-white py-4 px-8 flex justify-between items-center">
-      <h1 className="text-xl font-bold">🛍️ MiniStore</h1>
-      <nav className="space-x-4">
-        <a href="/" className="hover:text-blue-400">Home</a>
-        <a href="/products" className="hover:text-blue-400">Products</a>
-        <a href="/about" className="hover:text-blue-400">About</a>
+    <header className="flex justify-between items-center bg-gray-900 text-white p-4">
+      <Link href="/" className="font-bold text-lg">
+        MiniShop 🛒
+      </Link>
+      <nav className="flex gap-4">
+        <Link href="/products">Products</Link>
+        <Link href="/cart">
+          Cart ({count})
+        </Link>
       </nav>
     </header>
   );
